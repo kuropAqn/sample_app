@@ -1,6 +1,12 @@
 class ListsController < ApplicationController
   def new
-    @list = Lists.new
+    @list = List.new
+  end
+
+  def create
+    list = List.new(list_params)
+    list.save
+    redirect_to '/top'
   end
 
   def index
@@ -10,5 +16,10 @@ class ListsController < ApplicationController
   end
 
   def edit
+  end
+
+  private
+  def list_params
+    params.require(:list).parmit(:title,:body)
   end
 end
